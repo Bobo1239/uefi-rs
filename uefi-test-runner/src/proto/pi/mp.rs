@@ -6,21 +6,21 @@ use uefi::table::boot::BootServices;
 use uefi::Status;
 
 pub fn test(bt: &BootServices) {
-    // info!("Running UEFI multi-processor services protocol test");
-    // if let Ok(mp_support) = bt.locate_protocol::<MPServices>() {
-    //     let mp_support = mp_support
-    //         .expect("Warnings encountered while opening multi-processor services protocol");
-    //     let mp_support = unsafe { &mut *mp_support.get() };
+    info!("Running UEFI multi-processor services protocol test");
+    if let Ok(mp_support) = bt.locate_protocol::<MPServices>() {
+        let mp_support = mp_support
+            .expect("Warnings encountered while opening multi-processor services protocol");
+        let mp_support = unsafe { &mut *mp_support.get() };
 
-    //     test_get_number_of_processors(mp_support);
-    //     test_get_processor_info(mp_support);
-    //     test_startup_all_aps(mp_support, bt);
-    //     test_startup_this_ap(mp_support, bt);
-    //     test_enable_disable_ap(mp_support);
-    //     test_switch_bsp_and_who_am_i(mp_support);
-    // } else {
-    //     warn!("Multi-processor services protocol is not supported");
-    // }
+        test_get_number_of_processors(mp_support);
+        test_get_processor_info(mp_support);
+        test_startup_all_aps(mp_support, bt);
+        test_startup_this_ap(mp_support, bt);
+        test_enable_disable_ap(mp_support);
+        test_switch_bsp_and_who_am_i(mp_support);
+    } else {
+        warn!("Multi-processor services protocol is not supported");
+    }
 }
 
 fn test_get_number_of_processors(mps: &MPServices) {
