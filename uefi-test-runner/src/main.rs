@@ -34,7 +34,7 @@ fn efi_main(image: Handle, st: SystemTable<Boot>) -> Status {
     boot::test(bt);
 
     // Test all the supported protocols.
-    // proto::test(&st);
+    proto::test(&st);
 
     // TODO: test the runtime services.
     // These work before boot services are exited, but we'd probably want to
