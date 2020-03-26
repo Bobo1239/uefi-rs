@@ -30,11 +30,11 @@ fn efi_main(image: Handle, st: SystemTable<Boot>) -> Status {
     check_revision(st.uefi_revision());
 
     // Test all the boot services.
-    let bt = st.boot_services();
-    boot::test(bt);
+    // let bt = st.boot_services();
+    // boot::test(bt);
 
     // Test all the supported protocols.
-    proto::test(&st);
+    // proto::test(&st);
 
     // TODO: test the runtime services.
     // These work before boot services are exited, but we'd probably want to
@@ -111,6 +111,12 @@ fn shutdown(image: uefi::Handle, st: SystemTable<Boot>) -> ! {
     } else {
         info!("Testing complete, shutting down...");
     }
+
+    // use x86_64::instructions::port::Port;
+    // let mut port = Port::<u32>::new(0xf4);
+    // unsafe {
+    //     port.write(3);
+    // }
 
     // Exit boot services as a proof that it works :)
     let max_mmap_size =
