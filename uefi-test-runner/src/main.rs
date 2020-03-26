@@ -30,8 +30,8 @@ fn efi_main(image: Handle, st: SystemTable<Boot>) -> Status {
     check_revision(st.uefi_revision());
 
     // Test all the boot services.
-    // let bt = st.boot_services();
-    // boot::test(bt);
+    let bt = st.boot_services();
+    boot::test(bt);
 
     // Test all the supported protocols.
     // proto::test(&st);
